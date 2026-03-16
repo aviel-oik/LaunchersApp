@@ -5,20 +5,27 @@ import { useNavigate } from 'react-router-dom'
 
 
 function LauncherDetailsPage() {
-
+    // variables
     const { id } = useParams()
     const [launcher, setLauncher] = useState({})
     const navigate = useNavigate()
 
+    // useEffect 
     React.useEffect(() => {
         const launcherFetch = async () => {
             const res = await fetch(`http://localhost:3300/lauchers/${id}`)
             const launcher = await res.json()
             setLauncher(launcher)
         }
-        launcherFetch()
+        try{
+            launcherFetch()
+        }
+        catch(err){
+            alert(err)
+        }
     },[])
 
+  // return
   return (
     <div className='launcher-details-page'>
         <Header title="launcher-details" />
@@ -45,6 +52,7 @@ function LauncherDetailsPage() {
             </div>
             <button onClick={() => navigate(`/update-launcher/${launcher._id}`)}>UPDATE</button>
         </div>
+        <button onClick={() => navigate("/")}>Home page</button>
     </div>
   )
 }

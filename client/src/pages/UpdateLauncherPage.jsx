@@ -1,15 +1,17 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import Header from '../components/Header'
+import { useNavigate } from 'react-router-dom'
 
 
 function UpdateLauncherPage() {
-
+    // variable
     const { id } = useParams()
     const [newLauncher, setNewLauncher] = React.useState({})
     const [laucherUpdated, setLauncherUpdated] = React.useState(0)
+    const navigate = useNavigate()
 
-
+    // useEffect and function
     React.useEffect(() => {
         const launcherFetch = async () => {
             const res = await fetch(`http://localhost:3300/lauchers/${id}`)
@@ -20,17 +22,22 @@ function UpdateLauncherPage() {
     },[laucherUpdated])
 
     async function UpdateLauncher(){
-        const res = await fetch(`http://localhost:3300/lauchers/${id}`,{
-            method: "PUT",
-            headers : {"Content-Type": "application/json"},
-            body: JSON.stringify(newLauncher)
-        })
-        const result = await res.json()
-        setLauncherUpdated(laucherUpdated+1)
-        alert(result.message)
-
+        try{
+            const res = await fetch(`http://localhost:3300/lauchers/${id}`,{
+                method: "PUT",
+                headers : {"Content-Type": "application/json"},
+                body: JSON.stringify(newLauncher)
+            })
+            const result = await res.json()
+            setLauncherUpdated(laucherUpdated+1)
+            alert(result.message)
+        }
+        catch(err){
+            alert(err)
+        }
     }
 
+  // return
   return (
     <div className='update-launcher-page'>
         <Header title="Update Laucher" />
@@ -54,6 +61,7 @@ function UpdateLauncherPage() {
             <input type="text" id="city" placeholder='city...' value={newLauncher.city} onChange={(e) => setNewLauncher({...newLauncher, city: e.target.value})} />
             <button type='button' onClick={UpdateLauncher}>Update</button>        
         </form>
+        <button onClick={() => navigate("/")}>Home page</button>
     </div>
   )
 }

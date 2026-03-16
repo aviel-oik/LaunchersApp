@@ -1,21 +1,31 @@
 import React from 'react';
 import Header from '../components/Header'
+import { useNavigate } from 'react-router-dom';
+
 
 function AddLaucherPage() {
-
+    // variables
     const [newLauncher, setNewLancher] = React.useState({laucherName: "", rocketType: "", latitude: 0, longitude: 0, city: ""})
+    const navigate = useNavigate()
 
-    const addLauncherFetch = async () => { // try/catch
-        const res = await fetch("http://localhost:3300/lauchers",{
-            method: "POST",
-            headers : {"Content-Type": "application/json"},
-            body: JSON.stringify(newLauncher)
-        })
-        const result = await res.json()
-        alert(result.message)
-        setNewLancher({laucherName: "", rocketType: "", latitude: 0, longitude: 0, city: ""})
+    // function
+    const addLauncherFetch = async () => { 
+        try{
+            const res = await fetch("http://localhost:3300/lauchers",{
+                method: "POST",
+                headers : {"Content-Type": "application/json"},
+                body: JSON.stringify(newLauncher)
+            })
+            const result = await res.json()
+            alert(result.message)
+            setNewLancher({laucherName: "", rocketType: "", latitude: 0, longitude: 0, city: ""})
+        }
+        catch(err){
+            alert(err.message)
+        }
     }
 
+  // return 
   return (
     <div className='add-launcher-page'>
         <Header title="Add Laucher" />
@@ -39,6 +49,7 @@ function AddLaucherPage() {
             <input type="text" id="city" placeholder='city...' value={newLauncher.city} onChange={(e) => setNewLancher({...newLauncher, city: e.target.value})} />
             <button type='button' onClick={addLauncherFetch}>Submit</button>        
         </form>
+        <button onClick={() => navigate("/")}>Home page</button>
     </div>
   )
 }

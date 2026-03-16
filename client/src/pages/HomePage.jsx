@@ -2,14 +2,16 @@ import React from 'react'
 import Header from '../components/Header'
 import { useNavigate } from 'react-router-dom'
 
-function HomePage() {
 
+function HomePage() {
+    // variables
     const [lauchers, setLauchers] = React.useState([])
     const [typeFilter, setTypeFilter] = React.useState("")
     const [cityFilter, setCityFilter] = React.useState("")
     const [laucherDeleted, setLauncherDeleted] = React.useState(0)
     const navigate = useNavigate()
 
+    // useEffect and Function
     React.useEffect(() => {
         const lauchersFetch = async () => {
             const res = await fetch("http://localhost:3300/lauchers")
@@ -21,18 +23,29 @@ function HomePage() {
                 filteredLauchers = filteredLauchers.filter(l => l.city === cityFilter)
             setLauchers(filteredLauchers)
         }
-        lauchersFetch()
+        try{
+            lauchersFetch()
+        }
+        catch(err){
+            alert(err)
+        }
     },[typeFilter, cityFilter, laucherDeleted])
 
     async function deleteLauncher(id){
-        const res = await fetch(`http://localhost:3300/lauchers/${id}`,{
-            method: "DELETE"
-        })
-        const result = await res.json();
-        setLauncherDeleted(laucherDeleted+1)
-        alert(result.message)
+        try{
+            const res = await fetch(`http://localhost:3300/lauchers/${id}`,{
+                method: "DELETE"
+            })
+            const result = await res.json();
+            setLauncherDeleted(laucherDeleted+1)
+            alert(result.message)
+        }
+        catch(err){
+            alert(err)
+        }
     }
 
+  // return
   return (
     <div className='home-page'>
         <Header title="Lauchers List" />
