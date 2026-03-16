@@ -14,10 +14,24 @@ button {
   font-weight: 500;
   transition: 0.2s;
 }
-
 button:hover {
   transform: translateY(2px);
 }
+
+input{
+    padding: 10px 18px;
+    color: blue;
+    border: 1px solid blue;
+    border-radius: 5px;
+}
+
+select{
+    padding: 10px 18px;
+    border: 1px solid blue;
+    border-radius: 5px;
+}
+
+
 
 .header{
     height: 15vh;
@@ -30,9 +44,6 @@ button:hover {
         rgb(164, 159, 255)
     );
 }
-
-
-
 
 
 
@@ -64,10 +75,19 @@ button:hover {
     margin-top: 3%;
 }
 
-.home-inputFilter{
-    padding: 10px 18px;
-    color: blue;
-    border: 1px solid blue;
-    border-radius: 5px;
 
+
+.add-launcher-form{
+    display:grid;
+    width: 40%;
+    margin: 5% 30% 30%;
+    padding: 3% 3% 12% 3%;
+    border-radius: 20px;
+    gap: 10%;
+    box-shadow: 0px 10px 20px rgba(0, 13, 255, 0.2);
+}
+
+.add-launcher-form-coordinates{
+    display: flex;
+    gap: 10%;
 }
