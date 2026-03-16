@@ -7,7 +7,7 @@ export async function connectMoongooseDB(){
         console.log("connected to mongoDB suceffuly")
     }
     catch(err){
-        console.error(err)
+        console.log(err)
         process.exit(1)
     }
 }
