@@ -75,6 +75,14 @@ select{
     margin-top: 3%;
 }
 
+#delete-launcher{
+    background-color: red;
+}
+#add-launcher{
+    margin: 0% 45% 45%;
+    padding: 2%;
+    background-color: blue;
+}
 
 
 .add-launcher-form{
@@ -88,6 +96,35 @@ select{
 }
 
 .add-launcher-form-coordinates{
+    display: flex;
+    gap: 10%;
+}
+
+
+
+.launcher-details-info{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10%;
+    row-gap: 50%;
+    border: 1px solid blue;
+    width: 80%;
+    margin: 5% 10% 10%;
+    padding: 2% 5% 17% 5%;
+    box-shadow: 10px 10px 10px  blue;
+}
+
+.update-launcher-form{
+    display:grid;
+    width: 40%;
+    margin: 5% 30% 30%;
+    padding: 3% 3% 12% 3%;
+    border-radius: 20px;
+    gap: 10%;
+    box-shadow: 0px 10px 20px rgba(0, 13, 255, 0.2);
+}
+
+.update-launcher-form-coordinates{
     display: flex;
     gap: 10%;
 }

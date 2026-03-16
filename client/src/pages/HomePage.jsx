@@ -1,11 +1,14 @@
 import React from 'react'
 import Header from '../components/Header'
+import { useNavigate } from 'react-router-dom'
 
 function HomePage() {
 
     const [lauchers, setLauchers] = React.useState([])
     const [typeFilter, setTypeFilter] = React.useState("")
     const [cityFilter, setCityFilter] = React.useState("")
+    const [laucherDeleted, setLauncherDeleted] = React.useState(0)
+    const navigate = useNavigate()
 
     React.useEffect(() => {
         const lauchersFetch = async () => {
@@ -19,7 +22,16 @@ function HomePage() {
             setLauchers(filteredLauchers)
         }
         lauchersFetch()
-    },[typeFilter, cityFilter])
+    },[typeFilter, cityFilter, laucherDeleted])
+
+    async function deleteLauncher(id){
+        const res = await fetch(`http://localhost:3300/lauchers/${id}`,{
+            method: "DELETE"
+        })
+        const result = await res.json();
+        setLauncherDeleted(laucherDeleted+1)
+        alert(result.message)
+    }
 
   return (
     <div className='home-page'>
@@ -39,23 +51,30 @@ function HomePage() {
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Rocket Type</th>
                         <th>City</th>
+                        <th>Rocket Type</th>
                         <th>More Details</th>
+                        <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
                     {lauchers.map((laucher) => (
-                        <tr key={laucher.id}>
+                        <tr key={laucher._id}>
                             <td>{laucher.laucherName}</td>
-                            <td>{laucher.rocketType}</td>
                             <td>{laucher.city}</td>
-                            <td><button>...</button></td>
+                            <td>{laucher.rocketType}</td>
+                            <td>
+                                <button onClick={() => navigate(`/laucher-details/${laucher._id}`)}>Click for more detail</button>
+                            </td>
+                            <td>
+                                <button id='delete-launcher' onClick={() => deleteLauncher(laucher._id)} >Delete</button>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
         </div>
+        <button id='add-launcher' onClick={() => navigate("/add-laucher")}>Add Launcher</button>
     </div>
   )
 }
