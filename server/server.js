@@ -1,8 +1,10 @@
 import express from "express";
 import cors from "cors";
+import { connectMoongooseDB } from "./database/connectDB.js";
 
 const app = express();
 const PORT = 6000
+await connectMoongooseDB();
 
 app.use(cors());
 app.use(express.json());
