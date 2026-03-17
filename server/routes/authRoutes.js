@@ -65,6 +65,11 @@ route.post("/login", async (req, res) => {
     }
 })
 
-route.get("/getUser", () => {}) ////
+route.get("/getUser/:id", async (req, res) => {
+    const user = await User.findById(req.params.id);
+    if(!user)
+        return res.status(404).json({ message: "User not found" });
+    res.json(user)
+})
 
 export default route;
