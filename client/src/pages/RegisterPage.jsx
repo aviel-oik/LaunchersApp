@@ -4,13 +4,14 @@ import Navbar from '../components/Navbar';
 import { useNavigate } from 'react-router-dom'
 
 function RegisterPage() {
-
+    // variables
     const [users, setUsers] = React.useState([])
     const [userdeleted, setUserDeleted] = React.useState(0)
     const [useradded, setUserAdded] = React.useState(0)
     const [newUser, setNewUser] = React.useState({username: "", password: "", email: "", userType: ""})
     const navigate = useNavigate()
 
+    // useEffect and function
     React.useEffect(() => {
       const usersFetch = async () => {
         const token = localStorage.getItem("token")
@@ -57,6 +58,7 @@ function RegisterPage() {
       }
     }
 
+  // return
   return (
     <div className='register-page'>
       <Header title="Register" />

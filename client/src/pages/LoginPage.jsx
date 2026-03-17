@@ -4,12 +4,13 @@ import { useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../store/authStore'
 
 function LoginPage() {
-
+  // variables
   const [username, setUsername] = React.useState("")
   const [password, setPassword] = React.useState("")
   const navigate = useNavigate()
   const { login } = useAuthStore()
 
+  // useEfffect and Functions
   async function loginUser() {
     try{
       const res = await fetch("http://localhost:3300/api/auth/login",{
@@ -34,6 +35,7 @@ function LoginPage() {
     }
   }
 
+  //return
   return (
     <div className='login-page'>
       <Header title="Login" />

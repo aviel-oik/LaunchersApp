@@ -4,11 +4,12 @@ import Header from '../components/Header'
 import Navbar from '../components/Navbar';
 
 function UpdateUserPage() {
-
+    // variables
     const { id } = useParams()
     const [userUpdated, setUserUpdated] = React.useState(0) 
     const [newUser, setNewUser] = React.useState({username: "", password: "", email: "", userType: ""})
 
+    // useEffect and functions
     React.useEffect(() => {
       const userFetch = async () => {
         const token = localStorage.getItem("token")
@@ -38,6 +39,7 @@ function UpdateUserPage() {
       }
     }
 
+  // return
   return (    
     <div className='update-user-page'>
       <Header title="Update User" />
