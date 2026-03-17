@@ -35,17 +35,17 @@ function RegisterPage() {
     }
 
     async function deleteUser(id){
-        try{
-            const res = await fetch(`http://localhost:3300/api/auth/register/delete/${id}`,{
-                method: "DELETE"
-            })
-            const result = await res.json();
-            setUserDeleted(userdeleted+1)
-            alert(result.message)
-        }
-        catch(err){
-            alert(err)
-        }
+      try{
+          const res = await fetch(`http://localhost:3300/api/auth/register/delete/${id}`,{
+              method: "DELETE"
+          })
+          const result = await res.json();
+          setUserDeleted(userdeleted+1)
+          alert(result.message)
+      }
+      catch(err){
+          alert(err)
+      }
     }
 
   return (
