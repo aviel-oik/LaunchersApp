@@ -5,11 +5,21 @@ import jwt from "jsonwebtoken";
 const route = Router();
 
 route.post("/register/create", async (req, res) => {
-    if(!req.body.username || !req.body.password || !req.body.email || !req.body.user_type)
+    if(!req.body.username || !req.body.password || !req.body.email || !req.body.userType)
         return res.status(400).json({ message: "miss required fields" });
     try {
         await User.create(req.body) 
         res.json({message: "User added suceffuly"})
+    } 
+    catch (err) {
+        res.status(500).json({ error: err.message })
+    }
+})
+
+route.get("/users", async (req, res) => {
+    try {
+        const users = await User.find()
+        res.json(users)
     } 
     catch (err) {
         res.status(500).json({ error: err.message })

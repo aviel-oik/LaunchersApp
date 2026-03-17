@@ -135,3 +135,38 @@ select{
     display: flex;
     gap: 10%;
 }
+
+
+
+
+.register-user-form{
+    display: grid;
+    width: 40%;
+    margin: 2% 30% 0% 30%;
+    padding: 3%;
+    gap: 4%;
+}
+
+
+.users-list{
+    width: 80%;
+    margin: 5% 10% 3% 10%;
+}
+
+.users-list table {
+  width: 100%;
+  border-collapse: collapse; 
+}
+
+.users-list th,
+.users-list td {
+  border: 1px solid #000ace; 
+  padding: 10px;
+  text-align: left;
+}
+
+.users-list th {
+  background-color: rgb(164, 159, 255);
+  font-weight: bold;
+}
+
