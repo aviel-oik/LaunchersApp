@@ -11,9 +11,10 @@ function AddLaucherPage() {
     // function
     const addLauncherFetch = async () => { 
         try{
+            const token = localStorage.getItem("token")
             const res = await fetch("http://localhost:3300/api/lauchers",{
                 method: "POST",
-                headers : {"Content-Type": "application/json"},
+                headers : {"Content-Type": "application/json", "Authorization": `Barer ${token}`},
                 body: JSON.stringify(newLauncher)
             })
             const result = await res.json()

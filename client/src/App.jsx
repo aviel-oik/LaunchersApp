@@ -7,8 +7,14 @@ import UpdateLauncherPage from './pages/UpdateLauncherPage'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import UpdateUserPage from './pages/UpdateUserPage'
+import { useAuthStore } from './store/authStore'
+import React from 'react'
 
 function App() {
+
+  React.useEffect(() => {
+    useAuthStore.getState().initAuthStore();
+  }, [])
 
   return (
     <BrowserRouter>

@@ -13,7 +13,10 @@ function LauncherDetailsPage() {
     // useEffect 
     React.useEffect(() => {
         const launcherFetch = async () => {
-            const res = await fetch(`http://localhost:3300/api/lauchers/${id}`)
+            const token = localStorage.getItem("token")
+            const res = await fetch(`http://localhost:3300/api/lauchers/${id}`, {
+                headers: {"Authorization": `Barer ${token}`}
+            })
             const launcher = await res.json()
             setLauncher(launcher)
         }

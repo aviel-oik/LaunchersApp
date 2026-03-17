@@ -141,10 +141,13 @@ select{
 
 .register-user-form{
     display: grid;
+    grid-template-rows: repeat(5, 1fr);
     width: 40%;
     margin: 2% 30% 0% 30%;
     padding: 3%;
-    gap: 4%;
+    gap: 3%;
+    border-radius: 20px;
+    box-shadow: 0px 10px 20px rgba(0, 13, 255, 0.2);
 }
 
 
@@ -170,3 +173,13 @@ select{
   font-weight: bold;
 }
 
+.update-user-form{
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    width: 40%;
+    margin: 2% 30% 0% 30%;
+    padding: 3%;
+    gap: 3%;
+    border-radius: 20px;
+    box-shadow: 0px 10px 20px rgba(0, 13, 255, 0.2);
+}

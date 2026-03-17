@@ -13,8 +13,11 @@ function HomePage() {
 
     // useEffect and Function
     React.useEffect(() => {
+        const token = localStorage.getItem("token")
         const lauchersFetch = async () => {
-            const res = await fetch("http://localhost:3300/api/lauchers")
+            const res = await fetch("http://localhost:3300/api/lauchers", {
+                headers: {"Authorization": `Barer ${token}`}
+            })
             const lauchers = await res.json()
             let filteredLauchers = lauchers
             if(typeFilter !== "")
@@ -33,8 +36,10 @@ function HomePage() {
 
     async function deleteLauncher(id){
         try{
+            const token = localStorage.getItem("token")
             const res = await fetch(`http://localhost:3300/api/lauchers/${id}`,{
-                method: "DELETE"
+                method: "DELETE",
+                headers: {"Authorization": `Barer ${token}`}
             })
             const result = await res.json();
             setLauncherDeleted(laucherDeleted+1)

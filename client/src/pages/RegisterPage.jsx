@@ -11,7 +11,10 @@ function RegisterPage() {
 
     React.useEffect(() => {
       const usersFetch = async () => {
-        const res = await fetch("http://localhost:3300/api/auth/users")
+        const token = localStorage.getItem("token")
+        const res = await fetch("http://localhost:3300/api/auth/users", {
+                headers: {"Authorization": `Barer ${token}`}
+            })
         const users = await res.json()
         setUsers(users)
       }
@@ -20,9 +23,10 @@ function RegisterPage() {
 
     async function registerUser() {
       try{
+        const token = localStorage.getItem("token")
         const res = await fetch("http://localhost:3300/api/auth/register/create",{
           method: "POST",
-          headers : {"Content-Type": "application/json"},
+          headers : {"Content-Type": "application/json", "Authorization": `Barer ${token}`},
           body: JSON.stringify(newUser)
         })
         const result = await res.json()
@@ -36,8 +40,10 @@ function RegisterPage() {
 
     async function deleteUser(id){
       try{
+          const token = localStorage.getItem("token")
           const res = await fetch(`http://localhost:3300/api/auth/register/delete/${id}`,{
-              method: "DELETE"
+              method: "DELETE",
+              headers: {"Authorization": `Barer ${token}`}
           })
           const result = await res.json();
           setUserDeleted(userdeleted+1)

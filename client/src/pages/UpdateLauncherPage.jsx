@@ -14,7 +14,10 @@ function UpdateLauncherPage() {
     // useEffect and function
     React.useEffect(() => {
         const launcherFetch = async () => {
-            const res = await fetch(`http://localhost:3300/api/lauchers/${id}`)
+            const token = localStorage.getItem("token")
+            const res = await fetch(`http://localhost:3300/api/lauchers/${id}`, {
+                headers: {"Authorization": `Barer ${token}`}
+            })
             const launcher = await res.json()
             setNewLauncher(launcher)
         }
@@ -23,9 +26,10 @@ function UpdateLauncherPage() {
 
     async function UpdateLauncher(){
         try{
+            const token = localStorage.getItem("token")
             const res = await fetch(`http://localhost:3300/api/lauchers/${id}`,{
                 method: "PUT",
-                headers : {"Content-Type": "application/json"},
+                headers : {"Content-Type": "application/json", "Authorization": `Barer ${token}`},
                 body: JSON.stringify(newLauncher)
             })
             const result = await res.json()

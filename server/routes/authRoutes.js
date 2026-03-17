@@ -1,10 +1,12 @@
 import { Router } from "express";
 import User from "../models/user.js";
 import jwt from "jsonwebtoken";
+import { authMiddleware } from "../middleware/authMiddleware.js";
+import { roleMiddleware } from "../middleware/roleMiddleware.js";
 
 const route = Router();
 
-route.post("/register/create", async (req, res) => {
+route.post("/register/create", roleMiddleware([ "system-administrator"]), authMiddleware, async (req, res) => {
     if(!req.body.username || !req.body.password || !req.body.email || !req.body.userType)
         return res.status(400).json({ message: "miss required fields" });
     try {
@@ -16,7 +18,7 @@ route.post("/register/create", async (req, res) => {
     }
 })
 
-route.get("/users", async (req, res) => {
+route.get("/users", roleMiddleware(["system-administrator"]), authMiddleware, async (req, res) => {
     try {
         const users = await User.find()
         res.json(users)
@@ -26,7 +28,7 @@ route.get("/users", async (req, res) => {
     }
 })
 
-route.put("/register/update/:id", async (req, res) => {
+route.put("/register/update/:id", roleMiddleware(["system-administrator"]), authMiddleware, async (req, res) => {
     if (!req.params.id) 
         return res.status(400).json({ message: "ID required" });
     try {
@@ -38,7 +40,7 @@ route.put("/register/update/:id", async (req, res) => {
     }
 }) 
 
-route.delete("/register/delete/:id", async (req, res) => {
+route.delete("/register/delete/:id", roleMiddleware(["system-administrator"]), authMiddleware, async (req, res) => {
     if (!req.params.id) 
         return res.status(400).json({ message: "ID required" });
     try {
@@ -57,7 +59,7 @@ route.post("/login", async (req, res) => {
         const user = await User.findOne({ username: req.body.username, password: req.body.password });
         if (!user) 
             return res.status(401).json({ message: "Invalid username or password" });
-        const token = jwt.sign({ id: user._id , username: user.username, user_type: user.user_type }, process.env.JWT_SECRET, { expiresIn: "1h" });
+        const token = jwt.sign({ id: user._id , username: user.username, userType: user.userType }, process.env.JWT_SECRET, { expiresIn: "1h" });
         await User.findByIdAndUpdate(user._id, {"last_login": Date.now()}, { new: true }); ///
         res.json({ message: "Login successful", user, token });
     } catch (err) {
@@ -65,11 +67,27 @@ route.post("/login", async (req, res) => {
     }
 })
 
-route.get("/getUser/:id", async (req, res) => {
+route.get("/user/:id", roleMiddleware(["system-administrator"]), authMiddleware, async (req, res) => {
     const user = await User.findById(req.params.id);
     if(!user)
         return res.status(404).json({ message: "User not found" });
     res.json(user)
+})
+
+///
+route.get("/getUser", roleMiddleware(["intelligence-Corps", "air-Corps", "system-administrator"]), authMiddleware, async (req, res) => {
+    const token = req.headers.authorization?.split(" ")[1];
+    if (!token)
+        return res.status(401).json({ message: "Token required" });
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const user = await User.findById(decoded.id);
+        if (!user)            
+            return res.status(404).json({ message: "User not found" });
+        res.json(user);
+    } catch (err) {
+        res.status(401).json({ message: "Invalid token" });
+    }
 })
 
 export default route;
