@@ -1,5 +1,6 @@
 import React from 'react'
 import Header from '../components/Header'
+import Navbar from '../components/Navbar';
 import { useNavigate } from 'react-router-dom'
 
 
@@ -54,6 +55,7 @@ function HomePage() {
   return (
     <div className='home-page'>
         <Header title="Lauchers List" />
+        <Navbar />
         <div className='home-filter'>
             <input className='home-inputFilter' type="text" placeholder='Enter City name...' onChange={(e) => setCityFilter(e.target.value)}/>
             <select className='home-inputFilter' name="type-filter" id="type-filter" onChange={(e) => setTypeFilter(e.target.value)}>

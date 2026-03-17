@@ -1,11 +1,13 @@
 import React from 'react'
 import Header from '../components/Header'
+import Navbar from '../components/Navbar';
 import { useNavigate } from 'react-router-dom'
 
 function RegisterPage() {
 
     const [users, setUsers] = React.useState([])
     const [userdeleted, setUserDeleted] = React.useState(0)
+    const [useradded, setUserAdded] = React.useState(0)
     const [newUser, setNewUser] = React.useState({username: "", password: "", email: "", userType: ""})
     const navigate = useNavigate()
 
@@ -19,7 +21,7 @@ function RegisterPage() {
         setUsers(users)
       }
       usersFetch()
-    }, [userdeleted])
+    }, [userdeleted, useradded])
 
     async function registerUser() {
       try{
@@ -30,6 +32,7 @@ function RegisterPage() {
           body: JSON.stringify(newUser)
         })
         const result = await res.json()
+        setUserAdded(useradded+1)
         alert(result.message)
         setNewUser({username: "", password: "", email: "", userType: ""})
       }
@@ -57,6 +60,7 @@ function RegisterPage() {
   return (
     <div className='register-page'>
       <Header title="Register" />
+      <Navbar />
       <div className='register-user'>
         <form className='register-user-form'>
           <input type="text" placeholder='username...' value={newUser.username}  onChange={(e) => setNewUser({...newUser, username: e.target.value})}/>

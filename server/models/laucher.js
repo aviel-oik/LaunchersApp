@@ -5,7 +5,8 @@ const laucherShema = new mongoose.Schema({
     rocketType : {type: String, enum: ["Shahab3", "Fetah110", "Radwan", "Kheibar"], required: true}, 
     latitude : { type: Number, required: true}, 
     longitude : { type: Number, required: true},
-    laucherName : { type: String, required: true} 
+    laucherName : { type: String, required: true},
+    destroyed: {type: Boolean, default: false}
 });
 
 const Laucher = mongoose.model("Laucher", laucherShema);

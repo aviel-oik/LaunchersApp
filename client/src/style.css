@@ -183,3 +183,42 @@ select{
     border-radius: 20px;
     box-shadow: 0px 10px 20px rgba(0, 13, 255, 0.2);
 }
+
+
+
+
+.navbar{
+    border: 3px solid rgb(0, 0, 62);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    background-color: rgb(164, 159, 255);
+    height: 16%;
+}
+.navbar-left{    
+    display: flex;
+    gap:4%;
+    margin: 1%;
+}
+.navbar-left button{    
+    background-color: rgb(164, 159, 255);
+    color: rgb(0, 0, 68);
+    padding: 0px 3px 0px 2px;
+}
+.navbar-right{
+    display: flex;
+    gap:1%;
+    justify-self: end;
+    margin: 1%;
+}
+
+
+
+.login-page-form{
+    display:grid;
+    width: 40%;
+    margin: 5% 30% 5% 30%;
+    gap: 10%;
+    border-radius: 20px;
+    padding: 4%;
+    box-shadow: 0px 10px 20px rgba(0, 13, 255, 0.2);
+}

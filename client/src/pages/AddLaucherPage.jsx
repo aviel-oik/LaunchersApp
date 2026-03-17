@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from '../components/Header'
+import Navbar from '../components/Navbar';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -30,6 +31,7 @@ function AddLaucherPage() {
   return (
     <div className='add-launcher-page'>
         <Header title="Add Laucher" />
+        <Navbar />
         <form className='add-launcher-form' >
             <input type="text" placeholder='name...' value={newLauncher.laucherName} onChange={(e) => setNewLancher({...newLauncher, laucherName: e.target.value})} />
             <select  name="" id="" value={newLauncher.rocketType} onChange={(e) => setNewLancher({...newLauncher, rocketType: e.target.value})}>

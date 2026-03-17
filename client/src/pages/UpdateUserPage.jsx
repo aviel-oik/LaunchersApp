@@ -1,6 +1,7 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import Header from '../components/Header'
+import Navbar from '../components/Navbar';
 
 function UpdateUserPage() {
 
@@ -10,7 +11,10 @@ function UpdateUserPage() {
 
     React.useEffect(() => {
       const userFetch = async () => {
-        const res = await fetch(`http://localhost:3300/api/auth/user/${id}`)
+        const token = localStorage.getItem("token")
+        const res = await fetch(`http://localhost:3300/api/auth/user/${id}`,{
+          headers : { "Authorization": `Barer ${token}`}
+        })
         const user = await res.json()
         setNewUser(user)
       }
@@ -37,6 +41,7 @@ function UpdateUserPage() {
   return (    
     <div className='update-user-page'>
       <Header title="Update User" />
+      <Navbar />
         <form className='update-user-form'>
           <input type="text" placeholder='username...' value={newUser.username}  onChange={(e) => setNewUser({...newUser, username: e.target.value})}/>
           <input type="text" placeholder='passsword...' value={newUser.password} onChange={(e) => setNewUser({...newUser, password: e.target.value})}/>

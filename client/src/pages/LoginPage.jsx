@@ -35,11 +35,13 @@ function LoginPage() {
   }
 
   return (
-    <div>
+    <div className='login-page'>
       <Header title="Login" />
-      <input type="text" placeholder='username...' value={username} onChange={(e) => setUsername(e.target.value)} />
-      <input type="text" placeholder='password...' value={password} onChange={(e) => setPassword(e.target.value)} />
-      <button type='button' onClick={loginUser}>Login</button>
+      <form className='login-page-form' >
+        <input type="text" placeholder='username...' value={username} onChange={(e) => setUsername(e.target.value)} />
+        <input type="text" placeholder='password...' value={password} onChange={(e) => setPassword(e.target.value)} />
+        <button type='button' onClick={loginUser}>Login</button>
+      </form>
     </div>
    )
 }

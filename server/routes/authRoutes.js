@@ -6,7 +6,7 @@ import { roleMiddleware } from "../middleware/roleMiddleware.js";
 
 const route = Router();
 
-route.post("/register/create", roleMiddleware([ "system-administrator"]), authMiddleware, async (req, res) => {
+route.post("/register/create", authMiddleware, roleMiddleware([ "system-administrator"]), async (req, res) => {
     if(!req.body.username || !req.body.password || !req.body.email || !req.body.userType)
         return res.status(400).json({ message: "miss required fields" });
     try {
@@ -18,7 +18,7 @@ route.post("/register/create", roleMiddleware([ "system-administrator"]), authMi
     }
 })
 
-route.get("/users", roleMiddleware(["system-administrator"]), authMiddleware, async (req, res) => {
+route.get("/users", authMiddleware, roleMiddleware(["system-administrator"]), async (req, res) => {
     try {
         const users = await User.find()
         res.json(users)
@@ -28,7 +28,7 @@ route.get("/users", roleMiddleware(["system-administrator"]), authMiddleware, as
     }
 })
 
-route.put("/register/update/:id", roleMiddleware(["system-administrator"]), authMiddleware, async (req, res) => {
+route.put("/register/update/:id", authMiddleware, roleMiddleware(["system-administrator"]), async (req, res) => {
     if (!req.params.id) 
         return res.status(400).json({ message: "ID required" });
     try {
@@ -40,7 +40,7 @@ route.put("/register/update/:id", roleMiddleware(["system-administrator"]), auth
     }
 }) 
 
-route.delete("/register/delete/:id", roleMiddleware(["system-administrator"]), authMiddleware, async (req, res) => {
+route.delete("/register/delete/:id", authMiddleware, roleMiddleware(["system-administrator"]), async (req, res) => {
     if (!req.params.id) 
         return res.status(400).json({ message: "ID required" });
     try {
@@ -67,15 +67,14 @@ route.post("/login", async (req, res) => {
     }
 })
 
-route.get("/user/:id", roleMiddleware(["system-administrator"]), authMiddleware, async (req, res) => {
+route.get("/user/:id", authMiddleware, roleMiddleware(["system-administrator"]), async (req, res) => {
     const user = await User.findById(req.params.id);
     if(!user)
         return res.status(404).json({ message: "User not found" });
     res.json(user)
 })
 
-///
-route.get("/getUser", roleMiddleware(["intelligence-Corps", "air-Corps", "system-administrator"]), authMiddleware, async (req, res) => {
+route.get("/getUser", authMiddleware, roleMiddleware(["intelligence-Corps", "air-Corps", "system-administrator"]), async (req, res) => {
     const token = req.headers.authorization?.split(" ")[1];
     if (!token)
         return res.status(401).json({ message: "Token required" });

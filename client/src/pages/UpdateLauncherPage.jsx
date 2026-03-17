@@ -1,6 +1,7 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import Header from '../components/Header'
+import Navbar from '../components/Navbar';
 import { useNavigate } from 'react-router-dom'
 
 
@@ -45,6 +46,7 @@ function UpdateLauncherPage() {
   return (
     <div className='update-launcher-page'>
         <Header title="Update Laucher" />
+        <Navbar />
         <form className='update-launcher-form' >
             <input type="text" placeholder='name...' value={newLauncher.laucherName} onChange={(e) => setNewLauncher({...newLauncher, laucherName: e.target.value})} />
             <select  name="" id="" value={newLauncher.rocketType} onChange={(e) => setNewLauncher({...newLauncher, rocketType: e.target.value})}>

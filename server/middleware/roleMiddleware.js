@@ -1,8 +1,9 @@
 
 export const roleMiddleware = (requiredRoles) => {
     return (req, res, next) => {
+        console.log(req.user)
         if (!req.user) {
-            return res.status(401).json({ message: "token requiered" });
+            return res.status(401).json({ message: "token requiered3" });
         }
         if (!requiredRoles.includes(req.user.userType)) {
             console.log(req.user)

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Header from '../components/Header'
+import Navbar from '../components/Navbar';
 import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 
@@ -32,6 +33,7 @@ function LauncherDetailsPage() {
   return (
     <div className='launcher-details-page'>
         <Header title="launcher-details" />
+        <Navbar />
         <div className='launcher-details-info'>
             <div>
             <label htmlFor="details-name">Name: </label>
