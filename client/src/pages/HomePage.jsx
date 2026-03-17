@@ -10,6 +10,7 @@ function HomePage() {
     const [typeFilter, setTypeFilter] = React.useState("")
     const [cityFilter, setCityFilter] = React.useState("")
     const [laucherDeleted, setLauncherDeleted] = React.useState(0)
+    const [laucherDestroyed, setLauncherDestroyed] = React.useState(false)
     const navigate = useNavigate()
 
     // useEffect and Function
@@ -33,7 +34,7 @@ function HomePage() {
         catch(err){
             alert(err)
         }
-    },[typeFilter, cityFilter, laucherDeleted])
+    },[typeFilter, cityFilter, laucherDeleted, laucherDestroyed])
 
     async function deleteLauncher(id){
         try{
@@ -44,6 +45,23 @@ function HomePage() {
             })
             const result = await res.json();
             setLauncherDeleted(laucherDeleted+1)
+            alert(result.message)
+        }
+        catch(err){
+            alert(err)
+        }
+    }
+
+    async function destroyedLauncher(id){
+        try{
+            const token = localStorage.getItem("token")
+            const res = await fetch(`http://localhost:3300/api/lauchers/${id}`,{
+                method: "PUT",
+                headers : {"Content-Type": "application/json", "Authorization": `Barer ${token}`},
+                body: JSON.stringify({destroyed : true})
+            })
+            const result = await res.json()
+            setLauncherDestroyed(true)
             alert(result.message)
         }
         catch(err){
@@ -74,6 +92,7 @@ function HomePage() {
                         <th>City</th>
                         <th>Rocket Type</th>
                         <th>More Details</th>
+                        <th>Destroyed</th>
                         <th>Delete</th>
                     </tr>
                 </thead>
@@ -83,6 +102,11 @@ function HomePage() {
                             <td>{laucher.laucherName}</td>
                             <td>{laucher.city}</td>
                             <td>{laucher.rocketType}</td>
+                            <td>
+                                {laucher.destroyed ? <h3>Yes</h3> : null}
+                                {laucher.destroyed ? null : <button id='destroyed-btn' onClick={() => destroyedLauncher(laucher._id)} >destroyed</button>}
+                                
+                            </td>
                             <td>
                                 <button onClick={() => navigate(`/laucher-details/${laucher._id}`)}>Click for more detail</button>
                             </td>

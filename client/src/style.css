@@ -222,3 +222,11 @@ select{
     padding: 4%;
     box-shadow: 0px 10px 20px rgba(0, 13, 255, 0.2);
 }
+
+#destroyed-btn{
+    background: linear-gradient(
+        0deg,
+        rgb(234, 255, 0),
+        rgb(255, 0, 0)
+    );
+}
