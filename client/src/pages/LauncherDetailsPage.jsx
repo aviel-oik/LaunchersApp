@@ -13,7 +13,7 @@ function LauncherDetailsPage() {
     // useEffect 
     React.useEffect(() => {
         const launcherFetch = async () => {
-            const res = await fetch(`http://localhost:3300/lauchers/${id}`)
+            const res = await fetch(`http://localhost:3300/api/lauchers/${id}`)
             const launcher = await res.json()
             setLauncher(launcher)
         }
@@ -52,7 +52,7 @@ function LauncherDetailsPage() {
             </div>
             <button onClick={() => navigate(`/update-launcher/${launcher._id}`)}>UPDATE</button>
         </div>
-        <button onClick={() => navigate("/")}>Home page</button>
+        <button onClick={() => navigate("/home")}>Home page</button>
     </div>
   )
 }

@@ -4,13 +4,17 @@ import HomePage from './pages/HomePage'
 import LauncherDetailsPage from './pages/LauncherDetailsPage'
 import AddLaucherPage from './pages/AddLaucherPage'
 import UpdateLauncherPage from './pages/UpdateLauncherPage'
+import LoginPage from './pages/LoginPage'
+import RegisterPage from './pages/RegisterPage'
 
 function App() {
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />        
+        <Route path="/home" element={<HomePage />} />
         <Route path="/laucher-details/:id" element={<LauncherDetailsPage />} />
         <Route path="/update-launcher/:id" element={<UpdateLauncherPage />} />
         <Route path="/add-laucher" element={<AddLaucherPage />} />

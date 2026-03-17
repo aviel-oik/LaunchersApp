@@ -14,7 +14,7 @@ function HomePage() {
     // useEffect and Function
     React.useEffect(() => {
         const lauchersFetch = async () => {
-            const res = await fetch("http://localhost:3300/lauchers")
+            const res = await fetch("http://localhost:3300/api/lauchers")
             const lauchers = await res.json()
             let filteredLauchers = lauchers
             if(typeFilter !== "")
@@ -33,7 +33,7 @@ function HomePage() {
 
     async function deleteLauncher(id){
         try{
-            const res = await fetch(`http://localhost:3300/lauchers/${id}`,{
+            const res = await fetch(`http://localhost:3300/api/lauchers/${id}`,{
                 method: "DELETE"
             })
             const result = await res.json();

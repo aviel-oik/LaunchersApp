@@ -11,7 +11,7 @@ function AddLaucherPage() {
     // function
     const addLauncherFetch = async () => { 
         try{
-            const res = await fetch("http://localhost:3300/lauchers",{
+            const res = await fetch("http://localhost:3300/api/lauchers",{
                 method: "POST",
                 headers : {"Content-Type": "application/json"},
                 body: JSON.stringify(newLauncher)
@@ -49,7 +49,7 @@ function AddLaucherPage() {
             <input type="text" id="city" placeholder='city...' value={newLauncher.city} onChange={(e) => setNewLancher({...newLauncher, city: e.target.value})} />
             <button type='button' onClick={addLauncherFetch}>Submit</button>        
         </form>
-        <button onClick={() => navigate("/")}>Home page</button>
+        <button onClick={() => navigate("/home")}>Home page</button>
     </div>
   )
 }

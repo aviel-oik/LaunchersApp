@@ -14,7 +14,7 @@ function UpdateLauncherPage() {
     // useEffect and function
     React.useEffect(() => {
         const launcherFetch = async () => {
-            const res = await fetch(`http://localhost:3300/lauchers/${id}`)
+            const res = await fetch(`http://localhost:3300/api/lauchers/${id}`)
             const launcher = await res.json()
             setNewLauncher(launcher)
         }
@@ -23,7 +23,7 @@ function UpdateLauncherPage() {
 
     async function UpdateLauncher(){
         try{
-            const res = await fetch(`http://localhost:3300/lauchers/${id}`,{
+            const res = await fetch(`http://localhost:3300/api/lauchers/${id}`,{
                 method: "PUT",
                 headers : {"Content-Type": "application/json"},
                 body: JSON.stringify(newLauncher)
@@ -61,7 +61,7 @@ function UpdateLauncherPage() {
             <input type="text" id="city" placeholder='city...' value={newLauncher.city} onChange={(e) => setNewLauncher({...newLauncher, city: e.target.value})} />
             <button type='button' onClick={UpdateLauncher}>Update</button>        
         </form>
-        <button onClick={() => navigate("/")}>Home page</button>
+        <button onClick={() => navigate("/home")}>Home page</button>
     </div>
   )
 }
